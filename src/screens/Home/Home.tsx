@@ -7,13 +7,17 @@ import {
   View,
 } from "react-native";
 import { Task } from "../../components/Task";
-import { AddTask } from "../AddTask";
+import AddTask from "../AddTask";
 import { AntDesign } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
 
 
-export default function Home() {
+type HomeProps = {
+  navigation: StackNavigationProp<any>;
+}
+
+export default function Home({navigation} : HomeProps) {
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -52,7 +56,7 @@ export default function Home() {
           <Text style={styles.title}>To Do List</Text>
           <Text style={styles.subTitle}>Week day, 1 Month</Text>
         </View>
-        <TouchableOpacity style={styles.addTaskButton}>
+        <TouchableOpacity style={styles.addTaskButton} onPress={() => navigation.navigate('AddTask')}>
           <AntDesign name="plus" size={20} color="white" />
           <Text style={styles.addTaskButtonText}>Add Task</Text>
         </TouchableOpacity>
