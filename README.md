@@ -7,6 +7,8 @@ Para rodar este app é necessário fazer a instalação das seguintes biblioteca
 * Instalando funcionalidades do react-navigation:
 * `npm install @react-navigation/native`
 * `npx expo install react-native-screens react-native-safe-area-context`
+* `npm install @react-navigation/material-top-tabs react-native-tab-view`
+* `npx expo install react-native-pager-view`
 
 * Igualando as versões do React e do DOM:
 * `npm install react@18.2.0 react-dom@18.2.0`
