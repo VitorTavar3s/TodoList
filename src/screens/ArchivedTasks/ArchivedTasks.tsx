@@ -7,13 +7,13 @@ import {
 import { Task } from "../../components/Task";
 import { SearchInput } from "../../components/SearchInput";
 
-export default function Home() {
+export default function ArchivedTasks() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
       title: "Tarefa 1",
       description: "Descrição 1",
-      status: false,
+      status: true,
       date: new Date(),
     },
     {
