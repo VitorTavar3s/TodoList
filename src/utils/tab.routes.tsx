@@ -17,7 +17,7 @@ export default function TabRoutes(){
                 tabBarStyle: { backgroundColor: '#f0f0f0'},
             }}>
             <Tab.Screen
-                name="home"
+                name="Home"
                 component={Home}
                 options={{
                     tabBarIcon: ({color})=> <TabLabel title="All" count={2} tabColor={color}/>,
