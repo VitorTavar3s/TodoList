@@ -14,14 +14,14 @@ export default function ArchivedTasks() {
       title: "Tarefa 1",
       description: "Descrição 1",
       status: true,
-      date: new Date(),
+      date: "19/02/2024",
     },
     {
       id: 2,
       title: "Tarefa 2",
       description: "Descrição 2",
       status: true,
-      date: new Date(),
+      date: "19/02/2024",
     },
   ]);
 

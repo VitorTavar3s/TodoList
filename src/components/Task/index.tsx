@@ -16,7 +16,7 @@ type Props = {
   title: string;
   description: string;
   status: boolean;
-  date: Date;
+  date: string;
   onCheck?: () => void;
   onRemove?: () => void;
 };
@@ -29,6 +29,8 @@ export function Task({
   onCheck,
   onRemove,
 }: Props) {
+
+  const formattedDate = new Date(date).toLocaleDateString();
   return (
     <Container>
       <TaskDone
@@ -49,7 +51,7 @@ export function Task({
         </TaskText>
         <View style={styles.divider} />
         <TaskText>{description}</TaskText>
-        <TaskDate>{date.toLocaleDateString()}</TaskDate>
+        <TaskDate>{formattedDate}</TaskDate>
       </TaskInfo>
 
       <TaskDelete onPress={onRemove}>

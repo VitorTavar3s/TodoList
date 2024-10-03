@@ -14,7 +14,7 @@ export default function ClosedTasks() {
       title: "Tarefa 2",
       description: "Descrição 2",
       status: true,
-      date: new Date(),
+      date: "",
     },
   ]);
 
