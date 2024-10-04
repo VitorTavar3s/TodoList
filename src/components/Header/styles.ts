@@ -6,7 +6,7 @@ export const HeaderContainer = styled.View`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding-top: 40px;
+    padding-top: 45px;
     padding-bottom: 18px;
     align-items: center;
 `;
@@ -57,6 +57,6 @@ export const BackContainer = styled.View`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    padding-horizontal: 24px;
+    padding-horizontal: 16px;
     align-items: center;
 `;

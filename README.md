@@ -20,4 +20,13 @@ Para rodar este app é necessário fazer a instalação das seguintes biblioteca
 * Instalando o typescript:
 * `npm install -g typescript`
 
+* Instalando o Async Storage
+* `npm install @react-native-async-storage/async-storage`
+
+* Instalando o Formik
+* `npm install formik --save`
+
+* Instalando o Yup
+* `npm install yup`
+
 * Se estiver com o Visual Code aberto, feche-o e então abra-o novamente para que o projeto seja carregado corretamente com tudo o que foi instalado
