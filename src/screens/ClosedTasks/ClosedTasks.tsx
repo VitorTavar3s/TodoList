@@ -10,7 +10,7 @@ import { SearchInput } from "../../components/SearchInput";
 import { TasksContext } from "../../context/tasksContext";
 import { TaskProps } from "../../utils/types";
 
-export default function Home() {
+export default function ClosedTasks() {
 
   const {tasks, setTasks} = useContext(TasksContext);
   const [localTasksList, setLocalTasksList] = useState<TaskProps[]>([]);
@@ -37,7 +37,7 @@ export default function Home() {
   };
 
   function handleShowLocalListTasks(){
-    const filteredTasks = tasks.filter(task => !task.archived);
+    const filteredTasks = tasks.filter(task => !task.archived && task.status);
     setLocalTasksList(filteredTasks)
   }
 
@@ -58,15 +58,14 @@ export default function Home() {
               title={item.title}
               description={item.description}
               status={item.status}
-              date={item.date} // Agora date é uma string
+              date={item.date}
               onCheck={() => handleToggleComplete(item.id)}
               onRemove={() => handleDelete(item.id)}
             />
           )}
           ListEmptyComponent={() => (
             <View>
-              <Text style={{textAlign: 'center', fontWeight: 600}}>You have not registered any tasks yet!</Text>
-              <Text style={{textAlign: 'center'}}>Add a new task to start.</Text>
+              <Text style={{textAlign: 'center', fontWeight: 600}}>There are no closed tasks</Text>
             </View>
           )}
         />

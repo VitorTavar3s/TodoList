@@ -1,14 +1,10 @@
 import { ButtonStarted, Container, TextPrincipal, TextButton, ContainerLogo, ContainerButton } from "./styles";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../utils/types";
-
-type Props = NativeStackScreenProps<RootStackParamList>;
-
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export default function Principal() {
-    const navigation = useNavigation<Props['navigation']>();
+    const navigation = useNavigation<StackNavigationProp<any>>();
 
     return (
         <Container>
@@ -21,7 +17,7 @@ export default function Principal() {
             </ContainerLogo>
             <ContainerButton>
 
-                <ButtonStarted  onPress={() => navigation.navigate('Home')}>
+                <ButtonStarted  onPress={() => navigation.navigate('Tabs')}>
                     <TextButton >Get Started</TextButton>
                 </ButtonStarted>
             </ContainerButton>
