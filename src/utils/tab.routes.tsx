@@ -4,11 +4,15 @@ import OpenTasks from "../screens/OpenTasks/OpenTasks";
 import ClosedTasks from "../screens/ClosedTasks/ClosedTasks";
 import ArchivedTasks from "../screens/ArchivedTasks/ArchivedTasks";
 import { TabLabel } from "../components/TabLabel";
-import { TouchableOpacity, View } from 'react-native';
+import { useContext } from 'react';
+import { TasksContext } from '../context/tasksContext';
 
 const Tab = createMaterialTopTabNavigator();
 
 export default function TabRoutes(){
+
+    const {tasks} = useContext(TasksContext);
+    
     return(
         <Tab.Navigator
             screenOptions={{
@@ -20,7 +24,7 @@ export default function TabRoutes(){
                 name="Home"
                 component={Home}
                 options={{
-                    tabBarIcon: ({color})=> <TabLabel title="All" count={2} tabColor={color}/>,
+                    tabBarIcon: ({color})=> <TabLabel title="All" count={tasks.filter((task) => !task.archived).length} tabColor={color}/>,
                     tabBarShowLabel: false,
                     tabBarIconStyle: {width:'100%'},
                 }}
@@ -29,7 +33,7 @@ export default function TabRoutes(){
                 name="openTasks"
                 component={OpenTasks}
                 options={{
-                    tabBarIcon: ({color})=> <TabLabel title="Open" count={1} tabColor={color}/>,
+                    tabBarIcon: ({color})=> <TabLabel title="Open" count={tasks.filter((task) => !task.status).length} tabColor={color}/>,
                     tabBarShowLabel: false,
                     tabBarIconStyle: {width:'100%'}
                 }}
@@ -38,7 +42,7 @@ export default function TabRoutes(){
                 name="closedTasks"
                 component={ClosedTasks}
                 options={{
-                    tabBarIcon: ({color})=> <TabLabel title="Closed" count={1} tabColor={color}/>,
+                    tabBarIcon: ({color})=> <TabLabel title="Closed" count={tasks.filter((task) => task.status).length} tabColor={color}/>,
                     tabBarShowLabel: false,
                     tabBarIconStyle: {width:'100%'}
                 }}
@@ -47,7 +51,7 @@ export default function TabRoutes(){
                 name="archivedTasks"
                 component={ArchivedTasks}
                 options={{
-                    tabBarIcon: ({color})=> <TabLabel title="Archived" count={2} tabColor={color}/>,
+                    tabBarIcon: ({color})=> <TabLabel title="Archived" count={tasks.filter((task) => task.archived).length} tabColor={color}/>,
                     tabBarShowLabel: false,
                     tabBarIconStyle: {width:'100%'}
                 }}

@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import React, { useContext, useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../types/types";
 import {
   Input,
   FormContainer,
@@ -14,17 +12,18 @@ import {
   SaveButton,
   CancelButton
 } from "./styles";
-
-type AddTaskNavigationProp = StackNavigationProp<RootStackParamList, 'AddTask'>;
+import { TasksContext } from "../../context/tasksContext";
 
 export default function AddTask() {
+
+  const {tasks, setTasks} = useContext(TasksContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
 
-  const navigation = useNavigation<AddTaskNavigationProp>()
+  const navigation = useNavigation()
 
   const handleAddTask = () => {
     if (!title || !description) {
@@ -33,15 +32,18 @@ export default function AddTask() {
     }
 
     const newTask = {
-      id: Date.now(), 
-      title,
-      description,
-      status: false, 
+      id: Date.now(),
+      title: title,
+      description: description,
       date:date.toISOString(),
+      status: false,
+      archived: false
     };
 
-    navigation.navigate("Home", { newTask });
-    console.log("Tarefa adicionada:", newTask);
+    setTasks([...tasks, newTask]);
+    setTitle("");
+    setDescription("");
+    navigation.goBack();
   };
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
@@ -55,8 +57,6 @@ export default function AddTask() {
     setShowTimePicker(false);
     setDate(currentTime);
   };
-
-
 
   return (
     <View style={styles.container}>

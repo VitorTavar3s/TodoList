@@ -1,41 +1,49 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   FlatList,
   StyleSheet,
   View,
+  Text,
 } from "react-native";
 import { Task } from "../../components/Task";
 import { SearchInput } from "../../components/SearchInput";
+import { TasksContext } from "../../context/tasksContext";
+import { TaskProps } from "../../utils/types";
 
 export default function ClosedTasks() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 2,
-      title: "Tarefa 2",
-      description: "Descrição 2",
-      status: true,
-      date: "",
-    },
-  ]);
 
+  const {tasks, setTasks} = useContext(TasksContext);
+  const [localTasksList, setLocalTasksList] = useState<TaskProps[]>([]);
   const [inputText, setInputText] = useState("");
 
   const handleToggleComplete = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, status: !task.status } : task
-      )
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, status: !task.status } : task
     );
+    setTasks(updatedTasks);
   };
 
   const handleDelete = (id: number) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+    handleShowLocalListTasks();
   };
 
-  function handleSearchTask(){
-    //buscar tarefas com o nome salvo no hook inputText
-    console.log("funcao ainda nao implementada kkkkk")
+  function handleSearchTask() {
+    const filteredTasks = tasks.filter(task =>
+      task.title.toLowerCase().includes(inputText.toLowerCase())
+    );
+    setLocalTasksList(filteredTasks);
   };
+
+  function handleShowLocalListTasks(){
+    const filteredTasks = tasks.filter(task => !task.archived && task.status);
+    setLocalTasksList(filteredTasks)
+  }
+
+  useEffect(() => {
+    handleShowLocalListTasks()
+  }, [tasks]);
 
   return (
     <View style={styles.container}>
@@ -43,7 +51,7 @@ export default function ClosedTasks() {
         <SearchInput onPress={handleSearchTask} onChangeText={setInputText} value={inputText} />
         <FlatList
           style={styles.listTask}
-          data={tasks}
+          data={localTasksList}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Task
@@ -54,6 +62,11 @@ export default function ClosedTasks() {
               onCheck={() => handleToggleComplete(item.id)}
               onRemove={() => handleDelete(item.id)}
             />
+          )}
+          ListEmptyComponent={() => (
+            <View>
+              <Text style={{textAlign: 'center', fontWeight: 600}}>There are no closed tasks</Text>
+            </View>
           )}
         />
       </View>
