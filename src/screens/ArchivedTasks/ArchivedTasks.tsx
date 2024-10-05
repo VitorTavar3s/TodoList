@@ -41,6 +41,14 @@ export default function ArchivedTasks() {
     setLocalTasksList(filteredTasks)
   }
 
+  const handleUnarchive = (id: number) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, archived: false } : task
+    );
+    setTasks(updatedTasks);
+    handleShowLocalListTasks();
+  };
+
   useEffect(() => {
     handleShowLocalListTasks()
   }, [tasks]);
@@ -61,6 +69,8 @@ export default function ArchivedTasks() {
               date={item.date}
               onCheck={() => handleToggleComplete(item.id)}
               onRemove={() => handleDelete(item.id)}
+              onArchive={() => handleUnarchive(item.id)} // Função de desarquivar
+              archived={item.archived} // Está arquivado
             />
           )}
           ListEmptyComponent={() => (
@@ -85,5 +95,5 @@ const styles = StyleSheet.create({
   body: {
     gap: 20,
     padding: 20,
-  }
+  },
 });

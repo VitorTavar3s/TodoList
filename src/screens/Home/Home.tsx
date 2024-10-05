@@ -49,6 +49,14 @@ export default function Home() {
     setLocalTasksList(filteredTasks);
   };
 
+  const handleArchive = (id: number) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, archived: true } : task
+    );
+    setTasks(updatedTasks);
+    handleShowLocalListTasks();
+  };
+
   function handleShowLocalListTasks(){
     const filteredTasks = tasks.filter(task => !task.archived);
     setLocalTasksList(filteredTasks)
@@ -74,6 +82,8 @@ export default function Home() {
               date={item.date} // Agora date é uma string
               onCheck={() => handleToggleComplete(item.id)}
               onRemove={() => handleDelete(item.id)}
+              onArchive={() => handleArchive(item.id)}
+              archived={item.archived} // Não está arquivado
             />
           )}
           ListEmptyComponent={() => (

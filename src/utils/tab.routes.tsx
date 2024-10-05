@@ -34,7 +34,7 @@ export default function TabRoutes(){
                 name="openTasks"
                 component={OpenTasks}
                 options={{
-                    tabBarIcon: ({color})=> <TabLabel title="Open" count={tasks.filter((task) => !task.status).length} tabColor={color}/>,
+                    tabBarIcon: ({color})=> <TabLabel title="Open" count={tasks.filter((task) => !task.status && !task.archived).length} tabColor={color}/>,
                     tabBarShowLabel: false,
                     tabBarIconStyle: {width:'100%'}
                 }}
@@ -43,7 +43,7 @@ export default function TabRoutes(){
                 name="closedTasks"
                 component={ClosedTasks}
                 options={{
-                    tabBarIcon: ({color})=> <TabLabel title="Closed" count={tasks.filter((task) => task.status).length} tabColor={color}/>,
+                    tabBarIcon: ({color})=> <TabLabel title="Closed" count={tasks.filter((task) => task.status && !task.archived).length} tabColor={color}/>,
                     tabBarShowLabel: false,
                     tabBarIconStyle: {width:'100%'}
                 }}
