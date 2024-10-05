@@ -19,6 +19,7 @@ export default function TabRoutes(){
                 tabBarActiveTintColor: '#9A5CD0',
                 tabBarInactiveTintColor: '#ccc',
                 tabBarStyle: { backgroundColor: '#f0f0f0'},
+                tabBarIndicatorStyle: { backgroundColor: '#9A5CD0' }, // Cor do marcador
             }}>
             <Tab.Screen
                 name="Home"

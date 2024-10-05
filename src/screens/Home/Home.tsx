@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Alert
 } from "react-native";
 import { Task } from "../../components/Task";
 import { SearchInput } from "../../components/SearchInput";
@@ -24,10 +25,22 @@ export default function Home() {
   };
 
   const handleDelete = (id: number) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-    handleShowLocalListTasks();
-  };
+    Alert.alert("Attention!", "Do you really want to remove the task?",
+    [
+      {
+        text: 'Confirm',
+        onPress: () => {
+        const updatedTasks = tasks.filter((task) => task.id !== id);
+        setTasks(updatedTasks);
+        handleShowLocalListTasks();
+        }
+
+      },
+      { text: "Cancel", style: "cancel" }
+    ],
+  )
+  }
+
 
   function handleSearchTask() {
     const filteredTasks = tasks.filter(task =>
