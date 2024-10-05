@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const HeaderContainer = styled.View`
     background-color: #6C0BA9;
-    height: 120px;
+    height: 140px;
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
@@ -51,6 +51,8 @@ export const PageText = styled.Text`
     color: #FFF;
     font-size: 16px;
     font-weight: bold;
+    margin-right: 16px;
+    margin-bottom: 2px;
 `;
 
 export const BackContainer = styled.View`

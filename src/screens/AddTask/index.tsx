@@ -18,8 +18,6 @@ import * as Yup from 'yup';
 
 export default function AddTask() {
   const { tasks, setTasks } = useContext(TasksContext);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
@@ -139,7 +137,7 @@ export default function AddTask() {
                 onChange={handleTimeChange}
               />
             )}
-            <SaveButton onPress={handleSubmit}>
+            <SaveButton onPress={()=>handleSubmit()}>
               <Text style={{ color: '#FFF', fontSize: 16, fontWeight: "bold" }}>Save</Text>
             </SaveButton>
             <CancelButton onPress={() => navigation.goBack()}>

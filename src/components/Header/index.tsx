@@ -8,14 +8,18 @@ type Props = {
 }
 
 export function Header({ navigation }: Props) {
+    const actualDate = new Date();
+    const weekDays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const headerDate = `${weekDays[actualDate.getDay()]}, ${actualDate.getDate()} ${months[actualDate.getMonth()]} ${actualDate.getFullYear()}`;
     return (
         <View>
             {navigation.getState().index == 1 &&
                 <HeaderContainer>
                     <View>
                         <HeaderTitle>To Do List</HeaderTitle>
-                        <HeaderSubTitle>Week day, 1 Month</HeaderSubTitle>
-                        <BackContainer >
+                        <HeaderSubTitle>{headerDate}</HeaderSubTitle>
+                        <BackContainer>
                             <IconButton onPress={() => navigation.pop()}>
                                 <AntDesign name="left" size={20} color="white" />
                             </IconButton>
@@ -29,17 +33,19 @@ export function Header({ navigation }: Props) {
                 </HeaderContainer>
             }
             {navigation.getState().index == 2 &&
-                <HeaderContainer style={{ height: 180, flexDirection: "column", alignItems: "flex-start" }}>
+                <HeaderContainer>
                     <View>
                         <HeaderTitle>To Do List</HeaderTitle>
-                        <HeaderSubTitle>Week day, 1 Month</HeaderSubTitle>
+                        <HeaderSubTitle>{headerDate}</HeaderSubTitle>
+                        <BackContainer>
+                            <IconButton onPress={() => navigation.pop()}>
+                                <AntDesign name="left" size={20} color="white" />
+                            </IconButton>
+                        </BackContainer>
                     </View>
-                    <BackContainer >
-                        <IconButton onPress={() => navigation.pop()}>
-                            <AntDesign name="left" size={20} color="white" />
-                        </IconButton>
+                    <View style={{height: '100%', flexDirection: 'column', justifyContent:'flex-end'}}>
                         <PageText>New Task</PageText>
-                    </BackContainer>
+                    </View>
                 </HeaderContainer>
             }
         </View>
